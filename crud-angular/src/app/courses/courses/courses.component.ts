@@ -8,7 +8,10 @@ import { Course } from '../model/course';
 })
 export class CoursesComponent implements OnInit {
 
-  courses: Course[] = [];
+  courses: Course[] = [
+    { _id: "1", name: 'Angular', category: 'Front-End'}
+  ];
+  displayedColumns = ['name', 'category'];
 
   constructor() {
       // this.courses = [];
