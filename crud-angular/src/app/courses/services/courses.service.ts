@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Course } from './../model/course';
+import { tap } from 'rxjs/operators';
+import { first } from 'rxjs';
 
 
 @Injectable({
@@ -14,6 +16,10 @@ export class CoursesService {
   constructor(private httpClient: HttpClient) { }
 
   list() {
-    return this.httpClient.get<Course[]>(this.API);
+    return this.httpClient.get<Course[]>(this.API)
+    .pipe(
+      first(),
+      tap(courses => console.log(courses))
+    );
   }
 }
