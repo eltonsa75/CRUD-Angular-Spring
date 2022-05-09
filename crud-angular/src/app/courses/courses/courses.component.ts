@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
 
 import { ErrorDialogComponent } from './../../shared/components/error-dialog/error-dialog.component';
@@ -19,7 +20,10 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    private dialog: MatDialog ) {
+    private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
+    ) {
 
 
     this.courses$ = this.coursesService.list()
@@ -41,6 +45,10 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  onAdd(){
+    this.router.navigate(['new'], {relativeTo: this.route});
   }
 
 }
