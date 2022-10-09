@@ -22,7 +22,7 @@ export class CoursesListComponent implements OnInit {
    this.add.emit(true);
   }
 
-  onEdit(course: Course){
+  onEdit(course: Course) {
   this.edit.emit(course);
   }
 

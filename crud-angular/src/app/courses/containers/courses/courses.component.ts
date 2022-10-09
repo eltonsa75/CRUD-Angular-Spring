@@ -16,8 +16,6 @@ export class CoursesComponent implements OnInit {
 
   courses$: Observable<Course[]>;
 
-  
-
   constructor(
     private coursesService: CoursesService,
     private dialog: MatDialog,
