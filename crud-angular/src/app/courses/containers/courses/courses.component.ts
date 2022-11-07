@@ -6,6 +6,7 @@ import { catchError, Observable, of } from 'rxjs';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-courses',
@@ -20,7 +21,8 @@ export class CoursesComponent implements OnInit {
     private coursesService: CoursesService,
     private dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
     ) {
 
 
@@ -49,6 +51,14 @@ export class CoursesComponent implements OnInit {
 
   onEdit(course: Course){
   this.router.navigate(['edit', course._id], {relativeTo: this.route})
+  }
+
+  onRemove(course: Course){
+    this.coursesService.remove(course._id).subscribe(
+      () => {
+        this.snackBar.open('Curso Removido com Sucesso!', 'X', {duration: 5000});
+      }
+    );
   }
 
 }

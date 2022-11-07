@@ -26,8 +26,7 @@ export class CoursesService {
 
   loadById(id: string){
     return this.httpClient.get<Course>(`${this.API}/${id}`);
-  }
-  
+  } 
 
   save(record: Partial<Course>) {
     // console.log(record);
@@ -46,5 +45,11 @@ export class CoursesService {
   private update(record: Partial<Course>) {
     return this.httpClient.put<Course>(`${this.API}/${record._id}`, record).pipe(first());
   }
+
+  remove(id: string) {
+    return this.httpClient.delete(`${this.API}/${id}`).pipe(first());
+  }
+
+
 }
 
