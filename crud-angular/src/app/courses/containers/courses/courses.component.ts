@@ -36,6 +36,16 @@ export class CoursesComponent implements OnInit {
 
   }
 
+  refresh(){
+    this.courses$ = this.coursesService.list()
+    .pipe(
+      catchError(error => {
+        this.onError('Erro ao carregar cursos.');
+        return of([])
+      })
+    );
+  }
+
 
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
@@ -56,7 +66,12 @@ export class CoursesComponent implements OnInit {
   onRemove(course: Course){
     this.coursesService.remove(course._id).subscribe(
       () => {
-        this.snackBar.open('Curso Removido com Sucesso!', 'X', {duration: 5000});
+        this.refresh();
+        this.snackBar.open('Curso Removido com Sucesso!', 'X',
+         {duration: 5000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center'
+        });
       }
     );
   }
