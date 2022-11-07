@@ -8,6 +8,7 @@ import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
@@ -15,7 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CoursesComponent implements OnInit {
 
-  courses$: Observable<Course[]>;
+  courses$: Observable<Course[]> | null = null;
 
   constructor(
     private coursesService: CoursesService,
@@ -24,18 +25,8 @@ export class CoursesComponent implements OnInit {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
     ) {
-
-
-    this.courses$ = this.coursesService.list()
-    .pipe(
-      catchError(error => {
-        this.onError('Erro ao carregar cursos.');
-        return of([])
-      })
-    );
-
-  }
-
+  this.refresh();
+    }
   refresh(){
     this.courses$ = this.coursesService.list()
     .pipe(
@@ -72,7 +63,8 @@ export class CoursesComponent implements OnInit {
           verticalPosition: 'top',
           horizontalPosition: 'center'
         });
-      }
+      },
+      () => this.onError('Erro ao tentar remover cursor.')
     );
   }
 
