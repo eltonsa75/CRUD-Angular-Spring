@@ -2,9 +2,9 @@ package com.elton.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import com.elton.model.Course;
 import com.elton.repository.CourseRepository;
@@ -50,10 +50,9 @@ public class CourseController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Course create(@RequestBody @Valid Course course) {
-        //System.out.println(course.getname);
+        
         return courseRepository.save(course);
-        // return ResponseEntity.status(HttpStatus.CREATED)
-        // .body(courseRepository.save(course));
+       
         
     }
 
