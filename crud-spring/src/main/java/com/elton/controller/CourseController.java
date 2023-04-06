@@ -6,11 +6,12 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-import com.elton.model.Course;
+import com.elton.dto.CourseDTO;
+
 import com.elton.service.CourseService;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,24 +38,24 @@ public class CourseController {
 
     //@RequestMapping(method = RequestMethod.GET)
     @GetMapping
-    public List<Course> list() {
+    public List<CourseDTO> list() {
         return courseService.list();
     }
 
     @GetMapping("/{id}")
-    public Course findById(@PathVariable Long id){
+    public CourseDTO findById(@PathVariable Long id){
         return courseService.findById(id);
     }
     
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Course create(@RequestBody @Valid Course course) {        
+    public CourseDTO create(@RequestBody @Valid @NotNull CourseDTO course) {        
         return courseService.create(course);
     }
 
     @PutMapping("/{id}")
-    public Course update(@PathVariable @NotNull @Positive Long id,
-     @RequestBody @Valid Course course){
+    public CourseDTO update(@PathVariable @NotNull @Positive Long id,
+     @RequestBody @Valid @NotNull CourseDTO course){
         return courseService.update(id, course);
  }
 
