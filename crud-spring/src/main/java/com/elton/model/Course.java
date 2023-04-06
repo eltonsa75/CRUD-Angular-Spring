@@ -1,7 +1,10 @@
 package com.elton.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,7 +16,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.elton.enums.Category;
+import com.elton.enums.converters.Categoryconverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -37,11 +41,10 @@ public class Course {
     @Column(length = 100, nullable = false)
     private String name;
 
-    @NotBlank
-    @Length(max = 10)
-    @Pattern(regexp = "Back-end|Front-end")
+    @NotNull
     @Column(length = 10, nullable = false)
-    private String category;
+    @Convert(converter = Categoryconverter.class)
+    private Category category;
 
     @NotNull
     @NotBlank

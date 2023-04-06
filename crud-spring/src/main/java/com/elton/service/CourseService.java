@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.elton.dto.CourseDTO;
 import com.elton.dto.mapper.CourseMapper;
+import com.elton.enums.Category;
 import com.elton.exception.RecordNotFoundException;
-import com.elton.model.Course;
+
 import com.elton.repository.CourseRepository;
 
 import jakarta.validation.Valid;
@@ -52,7 +53,7 @@ public class CourseService {
         return courseRepository.findById(id)
         .map(recordFound -> {
             recordFound.setName(course.name());
-            recordFound.setCategory(course.category());
+            recordFound.setCategory(Category.FRONT_END);
             return courseMapper.toDTO(courseRepository.save(recordFound));
         })
         .orElseThrow(() -> new RecordNotFoundException(id)); 
