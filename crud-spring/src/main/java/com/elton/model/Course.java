@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -16,6 +15,8 @@ import org.hibernate.validator.constraints.Length;
 
 import com.elton.enums.Category;
 import com.elton.enums.converters.Categoryconverter;
+import com.elton.enums.converters.Status;
+import com.elton.enums.converters.StatusConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -41,14 +42,12 @@ public class Course {
 
     @NotNull
     @Column(length = 10, nullable = false)
-    @Convert(converter = Categoryconverter.class)
+  @Convert(converter = Categoryconverter.class)  
     private Category category;
 
     @NotNull
-    @NotBlank
-    @Length(max = 10)
-    @Pattern(regexp = "Ativo|Inativo")
     @Column(length = 10, nullable = false)
-    private String status = "Ativo";
+    @Convert(converter = StatusConverter.class)
+    private Status status = Status.ACTIVE;
     
 }
