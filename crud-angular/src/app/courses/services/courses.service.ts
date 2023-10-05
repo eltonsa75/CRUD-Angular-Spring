@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Course } from './../model/course';
-import { tap } from 'rxjs/operators';
+
 import { first } from 'rxjs';
-import { delay } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class CoursesService {
 
   loadById(id: string){
     return this.httpClient.get<Course>(`${this.API}/${id}`);
-  } 
+  }
 
   save(record: Partial<Course>) {
     // console.log(record);
