@@ -1,4 +1,4 @@
-import { CourseFormComponent } from './components/course-form/course-form.component';
+import { CourseFormComponent } from './containers/course-form/course-form.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
