@@ -24,6 +24,7 @@ export class CoursesService {
     );
   }
 
+  //Método do Resolver Guard que verifica os param que vem na URL (id)
   loadById(id: string){
     return this.httpClient.get<Course>(`${this.API}/${id}`);
   }
